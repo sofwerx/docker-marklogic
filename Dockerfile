@@ -26,13 +26,13 @@ COPY ${MARKLOGIC_RPM} /tmp/${MARKLOGIC_RPM}
 #Copy configuration file to image. Config file is used by initialization scripts
 COPY mlconfig.sh /opt
 # Copy entry-point init script to image
-COPY entry-point.sh /opt
+COPY run.sh /opt
 # Copy setup-enode script to image
 COPY setup-child.sh /opt
 # Copy the setup-master script to the image
 COPY setup-master.sh /opt
 # Set file permissions of configuration scripts
-RUN chmod a+x /opt/entry-point.sh && \
+RUN chmod a+x /opt/run.sh && \
     chmod a+x /opt/setup-child.sh && \
     chmod a+x /opt/setup-master.sh
 
@@ -51,4 +51,4 @@ EXPOSE 7997 7998 7999 8000 8001 8002
 
 VOLUME /data
 
-ENTRYPOINT /opt/entry-point.sh
+CMD /opt/run.sh

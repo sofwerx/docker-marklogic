@@ -1,0 +1,25 @@
+version: "2"
+
+volumes:
+  datahub-data:
+    driver: local
+
+services:
+
+  datahub:
+    build: .
+    volumes:
+      - "datahub-data:/data"
+    ports:
+      - "7997:7997" # Default HealthCheck application server port and is required to check health/proper running of a MarkLogic instance.
+      - "7998:7998" # Default foreign bind port on which the server listens for foreign inter-host communication between MarkLogic clusters.
+      - "7999:7999" # Default bind port on which the server listens for inter-host communication within the cluster. The bind port is required for all MarkLogic Server Clusters.
+      - "8000:8000" # Default App-Services application server port and is required by Query Console.
+      - "8001:8001" # Default Admin application server port and is required by the Administrative Interface.
+      - "8002:8002" # Default Manage application server port and is required by Configuration Manager and Monitoring Dashboard.
+      - "8040:8040"
+      - "8041:8041"
+      - "8042:8042"
+      - "8043:8043"
+      - "8044:8044"
+
